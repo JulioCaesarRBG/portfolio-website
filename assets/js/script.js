@@ -172,3 +172,109 @@ const publicationItems = document.querySelectorAll(".publication-item");
 for (let i = 0; i < publicationItems.length; i++) {
   publicationItems[i].classList.add("active");
 }
+
+
+// Copy to clipboard functionality for email and phone
+const emailLink = document.getElementById('email-link');
+const phoneLink = document.getElementById('phone-link');
+
+// Function to copy text to clipboard and show notification
+function copyToClipboard(text, type) {
+  navigator.clipboard.writeText(text).then(function() {
+    // Create and show notification
+    showCopyNotification(type + ' copied to clipboard!');
+  }).catch(function(err) {
+    // Fallback for older browsers
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textArea);
+    showCopyNotification(type + ' copied to clipboard!');
+  });
+}
+
+// Function to show copy notification
+function showCopyNotification(message) {
+  // Remove existing notification if any
+  const existingNotification = document.querySelector('.copy-notification');
+  if (existingNotification) {
+    existingNotification.remove();
+  }
+
+  // Create notification element
+  const notification = document.createElement('div');
+  notification.className = 'copy-notification';
+  notification.textContent = message;
+  notification.style.cssText = `
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: linear-gradient(135deg, hsl(210, 100%, 65%), hsl(220, 100%, 70%));
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 1000;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    animation: slideInLeft 0.3s ease-out;
+  `;
+
+  // Add animation keyframes if not already added
+  if (!document.querySelector('#copy-notification-styles')) {
+    const style = document.createElement('style');
+    style.id = 'copy-notification-styles';
+    style.textContent = `
+      @keyframes slideInLeft {
+        from {
+          transform: translateX(-100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+      @keyframes slideOutLeft {
+        from {
+          transform: translateX(0);
+          opacity: 1;
+        }
+        to {
+          transform: translateX(-100%);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  document.body.appendChild(notification);
+
+  // Remove notification after 3 seconds
+  setTimeout(() => {
+    notification.style.animation = 'slideOutLeft 0.3s ease-out';
+    setTimeout(() => {
+      if (notification.parentNode) {
+        notification.remove();
+      }
+    }, 300);
+  }, 3000);
+}
+
+// Add click event listeners for email and phone
+if (emailLink) {
+  emailLink.addEventListener('click', function(e) {
+    e.preventDefault();
+    copyToClipboard('julioray171@gmail.com', 'Email');
+  });
+}
+
+if (phoneLink) {
+  phoneLink.addEventListener('click', function(e) {
+    e.preventDefault();
+    copyToClipboard('+6287716720962', 'Phone number');
+  });
+}
