@@ -16,42 +16,7 @@ sidebarBtn.addEventListener("click", function () { elementToggleFunc(sidebar); }
 
 
 
-// testimonials variables
-const testimonialsItem = document.querySelectorAll("[data-testimonials-item]");
-const modalContainer = document.querySelector("[data-modal-container]");
-const modalCloseBtn = document.querySelector("[data-modal-close-btn]");
-const overlay = document.querySelector("[data-overlay]");
 
-// modal variable
-const modalImg = document.querySelector("[data-modal-img]");
-const modalTitle = document.querySelector("[data-modal-title]");
-const modalText = document.querySelector("[data-modal-text]");
-
-// modal toggle function
-const testimonialsModalFunc = function () {
-  modalContainer.classList.toggle("active");
-  overlay.classList.toggle("active");
-}
-
-// add click event to all modal items
-for (let i = 0; i < testimonialsItem.length; i++) {
-
-  testimonialsItem[i].addEventListener("click", function () {
-
-    modalImg.src = this.querySelector("[data-testimonials-avatar]").src;
-    modalImg.alt = this.querySelector("[data-testimonials-avatar]").alt;
-    modalTitle.innerHTML = this.querySelector("[data-testimonials-title]").innerHTML;
-    modalText.innerHTML = this.querySelector("[data-testimonials-text]").innerHTML;
-
-    testimonialsModalFunc();
-
-  });
-
-}
-
-// add click event to modal close button
-modalCloseBtn.addEventListener("click", testimonialsModalFunc);
-overlay.addEventListener("click", testimonialsModalFunc);
 
 
 
@@ -156,4 +121,54 @@ for (let i = 0; i < navigationLinks.length; i++) {
     }
 
   });
+}
+
+
+
+// project modal variables
+const projectItems = document.querySelectorAll("[data-project-item]");
+const projectModalContainer = document.querySelector("[data-project-modal-container]");
+const projectModalCloseBtn = document.querySelector("[data-project-modal-close-btn]");
+const projectOverlay = document.querySelector("[data-project-overlay]");
+
+// project modal elements
+const projectModalImg = document.querySelector("[data-project-modal-img]");
+const projectModalTitle = document.querySelector("[data-project-modal-title]");
+const projectModalText = document.querySelector("[data-project-modal-text]");
+const modalTech = document.querySelector("[data-project-modal-tech]");
+const modalPeriod = document.querySelector("[data-project-modal-period]");
+
+// project modal toggle function
+const projectModalFunc = function () {
+  projectModalContainer.classList.toggle("active");
+  projectOverlay.classList.toggle("active");
+}
+
+// add click event to all project items
+for (let i = 0; i < projectItems.length; i++) {
+  projectItems[i].addEventListener("click", function (e) {
+    e.preventDefault();
+
+    projectModalImg.src = this.dataset.projectImg;
+    projectModalImg.alt = this.dataset.projectTitle;
+    projectModalTitle.innerHTML = this.dataset.projectTitle;
+    projectModalText.innerHTML = "<p>" + this.dataset.projectDescription + "</p>";
+    modalTech.innerHTML = this.dataset.projectTech;
+    modalPeriod.innerHTML = this.dataset.projectPeriod;
+
+    projectModalFunc();
+  });
+}
+
+// add click event to modal close button
+projectModalCloseBtn.addEventListener("click", projectModalFunc);
+projectOverlay.addEventListener("click", projectModalFunc);
+
+
+// publication variables
+const publicationItems = document.querySelectorAll(".publication-item");
+
+// show all publication items by default
+for (let i = 0; i < publicationItems.length; i++) {
+  publicationItems[i].classList.add("active");
 }
