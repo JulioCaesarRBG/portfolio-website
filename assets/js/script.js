@@ -194,6 +194,62 @@ projectModalCloseBtn.addEventListener("click", projectModalFunc);
 projectOverlay.addEventListener("click", projectModalFunc);
 
 
+// Certificate modal functionality
+const certificateModalContainer = document.querySelector("[data-certificate-modal-container]");
+const certificateModalCloseBtn = document.querySelector("[data-certificate-modal-close-btn]");
+const certificateOverlay = document.querySelector("[data-certificate-overlay]");
+const certificateModalImg = document.querySelector("[data-certificate-modal-img]");
+
+console.log('Certificate modal elements:', {
+  container: certificateModalContainer,
+  closeBtn: certificateModalCloseBtn,
+  overlay: certificateOverlay,
+  img: certificateModalImg
+});
+
+// certificate modal toggle function
+const certificateModalFunc = function () {
+  if (certificateModalContainer && certificateOverlay) {
+    certificateModalContainer.classList.toggle("active");
+    certificateOverlay.classList.toggle("active");
+    console.log('Modal toggled, active:', certificateModalContainer.classList.contains("active"));
+  }
+}
+
+// function to open certificate modal
+function openCertificateModal(imageSrc, altText) {
+  console.log('Opening certificate modal:', imageSrc, altText);
+  console.log('Modal container:', certificateModalContainer);
+  console.log('Modal image:', certificateModalImg);
+  
+  if (certificateModalImg && certificateModalContainer) {
+    certificateModalImg.src = imageSrc;
+    certificateModalImg.alt = altText;
+    certificateModalFunc();
+    console.log('Modal should be open now');
+  } else {
+    console.error('Modal elements not found');
+  }
+}
+
+// add click event to certificate modal close button
+if (certificateModalCloseBtn) {
+  certificateModalCloseBtn.addEventListener("click", certificateModalFunc);
+}
+if (certificateOverlay) {
+  certificateOverlay.addEventListener("click", certificateModalFunc);
+}
+
+// close modal with ESC key
+document.addEventListener("keydown", function(e) {
+  if (e.key === "Escape") {
+    if (certificateModalContainer.classList.contains("active")) {
+      certificateModalFunc();
+    }
+  }
+});
+
+
 // publication variables
 const publicationItems = document.querySelectorAll(".publication-item");
 

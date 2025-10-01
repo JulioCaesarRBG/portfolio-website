@@ -194,6 +194,29 @@
     </div>
 
 
+    <!--
+      - #CERTIFICATE IMAGE MODAL
+    -->
+
+    <div class="certificate-modal-container" data-certificate-modal-container>
+
+      <div class="certificate-overlay" data-certificate-overlay></div>
+
+      <section class="certificate-modal">
+
+        <button class="modal-close-btn" data-certificate-modal-close-btn>
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
+
+        <div class="certificate-img-wrapper">
+          <img src="" alt="Certificate" data-certificate-modal-img>
+        </div>
+
+      </section>
+
+    </div>
+
+
 
 
     <!--
@@ -1003,10 +1026,13 @@
             </li>
 
             <li class="blog-post-item">
-              <a href="#" target="_blank">
+              <div class="certificate-wrapper">
 
-                <figure class="blog-banner-box">
+                <figure class="blog-banner-box" onclick="openCertificateModal('./assets/images/certificate-7.jpg', 'MikroTik Certified Network Associate')">
                   <img src="./assets/images/certificate-7.jpg" alt="MikroTik Certified Network Associate" loading="lazy">
+                  <div class="certificate-zoom-overlay">
+                    <ion-icon name="expand-outline"></ion-icon>
+                  </div>
                 </figure>
 
                 <div class="blog-content">
@@ -1040,14 +1066,17 @@
 
                 </div>
 
-              </a>
+              </div>
             </li>
 
             <li class="blog-post-item">
-              <a href="#" target="_blank">
+              <div class="certificate-wrapper">
 
-                <figure class="blog-banner-box">
+                <figure class="blog-banner-box" onclick="openCertificateModal('./assets/images/certificate-8.jpg', 'JLPT N5 Certificate')">
                   <img src="./assets/images/certificate-8.jpg" alt="JLPT N5 Certificate" loading="lazy">
+                  <div class="certificate-zoom-overlay">
+                    <ion-icon name="expand-outline"></ion-icon>
+                  </div>
                 </figure>
 
                 <div class="blog-content">
@@ -1081,7 +1110,7 @@
 
                 </div>
 
-              </a>
+              </div>
             </li>
 
           </ul>
