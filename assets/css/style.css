@@ -999,6 +999,31 @@ main {
   transform: translateY(-2px);
 }
 
+/* External link overlay for certificates */
+.external-link-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  cursor: pointer;
+}
+
+.blog-banner-box:hover .external-link-overlay {
+  opacity: 1;
+}
+
+.external-link-overlay ion-icon {
+  font-size: 30px;
+  color: white;
+}
+
 .certificate-modal-container {
   position: fixed;
   top: 0;
