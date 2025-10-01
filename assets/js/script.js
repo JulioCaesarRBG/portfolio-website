@@ -137,6 +137,9 @@ const projectModalTitle = document.querySelector("[data-project-modal-title]");
 const projectModalText = document.querySelector("[data-project-modal-text]");
 const modalTech = document.querySelector("[data-project-modal-tech]");
 const modalPeriod = document.querySelector("[data-project-modal-period]");
+const modalGallery = document.querySelector("[data-project-modal-gallery]");
+const modalGithub = document.querySelector("[data-project-modal-github]");
+const githubLink = document.querySelector("[data-project-github-link]");
 
 // project modal toggle function
 const projectModalFunc = function () {
@@ -155,6 +158,32 @@ for (let i = 0; i < projectItems.length; i++) {
     projectModalText.innerHTML = "<p>" + this.dataset.projectDescription + "</p>";
     modalTech.innerHTML = this.dataset.projectTech;
     modalPeriod.innerHTML = this.dataset.projectPeriod;
+
+    // Handle gallery images
+    if (this.dataset.projectGallery) {
+      const galleryImages = this.dataset.projectGallery.split(',');
+      const galleryGrid = modalGallery.querySelector('.gallery-grid');
+      galleryGrid.innerHTML = '';
+      
+      galleryImages.forEach(imageSrc => {
+        const galleryItem = document.createElement('div');
+        galleryItem.className = 'gallery-item';
+        galleryItem.innerHTML = `<img src="${imageSrc.trim()}" alt="Project screenshot" loading="lazy">`;
+        galleryGrid.appendChild(galleryItem);
+      });
+      
+      modalGallery.style.display = 'block';
+    } else {
+      modalGallery.style.display = 'none';
+    }
+
+    // Handle GitHub link
+    if (this.dataset.projectGithub) {
+      githubLink.href = this.dataset.projectGithub;
+      modalGithub.style.display = 'block';
+    } else {
+      modalGithub.style.display = 'none';
+    }
 
     projectModalFunc();
   });
